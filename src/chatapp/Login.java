@@ -136,20 +136,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
         // TODO add your handling code here:
-         try {
-Connection c = new Connection();
-        String sql = "INSERT INTO demo (name) VALUES (?)";
-
-        try (PreparedStatement preparedStatement = c.getConnection().prepareStatement(sql)) {
-            preparedStatement.setString(1, inemail.getText());
-            preparedStatement.executeUpdate();
-            
-            System.out.println("Data inserted successfully");
-        }
-    } catch (SQLException e) {
-        // Handle SQLException or print the stack trace for debugging
-        System.out.println("Error: " + e.getMessage());
-    }
+    
 
 
         
