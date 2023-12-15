@@ -1,9 +1,6 @@
 package chatapp;
 
 import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 public class ConnectionToDB {
     Connection c;
     Statement s;
@@ -20,8 +17,8 @@ public class ConnectionToDB {
         }
         
         }
+    public PreparedStatement ps(String sql) throws SQLException {
+          // Creating and returning a PreparedStatement for the provided SQL query
+        return c.prepareStatement(sql);
     }
-
-
-//            Statement statement = connection.createStatement();
-//            statement.executeUpdate(variable who carru sql query)
+}
