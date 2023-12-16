@@ -29,6 +29,7 @@ public class Register extends javax.swing.JFrame {
         comformPassword = new javax.swing.JPasswordField();
         comformPasswordLabel = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
+        login = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +59,13 @@ public class Register extends javax.swing.JFrame {
         comformPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         comformPasswordLabel.setText("Comform Password");
 
+        login.setText("Log In");
+        login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -65,25 +73,29 @@ public class Register extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameLabel)
-                            .addComponent(emailLabel)
-                            .addComponent(phoneLabel)
-                            .addComponent(passwordLabel)
-                            .addComponent(comformPasswordLabel))
-                        .addGap(61, 61, 61)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(comformPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-                            .addComponent(email, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(phone, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(password)
-                            .addComponent(name)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(272, 272, 272)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(registerlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(registerlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                                .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nameLabel)
+                                    .addComponent(emailLabel)
+                                    .addComponent(phoneLabel)
+                                    .addComponent(passwordLabel)
+                                    .addComponent(comformPasswordLabel))
+                                .addGap(61, 61, 61)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(comformPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                                    .addComponent(email, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(phone, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(password)
+                                    .addComponent(name))))))
                 .addContainerGap(137, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -112,7 +124,9 @@ public class Register extends javax.swing.JFrame {
                     .addComponent(comformPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comformPasswordLabel))
                 .addGap(18, 18, 18)
-                .addComponent(register)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(register)
+                    .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(101, 101, 101))
         );
 
@@ -131,23 +145,16 @@ public class Register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
-        try{
-            if(name.getText().equals("")){
-                JOptionPane.showMessageDialog(null, "Name Required");
-            }else if(email.getText().equals("")){
-                JOptionPane.showMessageDialog(null, "Email Required");
-            }else if(!password.getText().equals(comformPassword.getText())){
-                JOptionPane.showMessageDialog(null, "Password MisMatch");
-            }else{
-                ConnectionToDB c = new ConnectionToDB();
-                String sql = "INSERT INTO appuser(userName, userEmail, userPhone, passWord) VALUES('"+name.getText()+"', '"+email.getText()+"', '"+phone.getText()+"', '"+password.getText()+"')";
-                c.s.executeUpdate(sql); 
-                JOptionPane.showMessageDialog(null, "Registered Successfully");
-            }
-        }catch(Exception e){
-            System.out.println(e);
-        }
+        
+        
     }//GEN-LAST:event_registerActionPerformed
+
+    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        Login loginpage = new Login();
+        loginpage.setVisible(true);
+    }//GEN-LAST:event_loginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,6 +197,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JTextField email;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton login;
     private javax.swing.JTextField name;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JPasswordField password;

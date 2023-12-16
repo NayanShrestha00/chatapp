@@ -3,15 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/chatapp/src/chatapp/Connection.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/chatapp/src/chatapp/Profile.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/chatapp/src/chatapp/ConnectionToDB.java</file>
             <file>file:/C:/Users/HP/Documents/NetBeansProjects/chatapp/src/chatapp/Chatapp.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/chatapp/src/chatapp/UpdatePassword.java</file>
             <file>file:/C:/Users/HP/Documents/NetBeansProjects/chatapp/src/chatapp/Login.java</file>
-=======
-            <file>file:/D:/java/chatappp/src/chatapp/ConnectionToDB.java</file>
-            <file>file:/D:/java/chatappp/src/chatapp/Register.java</file>
-            <file>file:/D:/java/chatappp/src/chatapp/Chatapp.java</file>
->>>>>>> 2f7ac266ec688bb5b7b035daf6a85b6db0953b98
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/chatapp/src/chatapp/Register.java</file>
         </group>
     </open-files>
 </project-private>
