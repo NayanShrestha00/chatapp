@@ -1,12 +1,16 @@
 package chatapp;
 
-import javax.swing.JOptionPane;
 import java.sql.*;
+import java.io.*;
+import javax.swing.JOptionPane;
+
 public class Register extends javax.swing.JFrame {
+
     public Register() {
         initComponents();
-        setLocation(350,200);
+        setLocation(350, 200);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,7 +33,11 @@ public class Register extends javax.swing.JFrame {
         comformPassword = new javax.swing.JPasswordField();
         comformPasswordLabel = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
+<<<<<<< HEAD
         login = new javax.swing.JButton();
+=======
+        Login = new javax.swing.JButton();
+>>>>>>> 1c7d94b618ca5879d4ae89f549a9b09eb5d71c1c
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,10 +67,17 @@ public class Register extends javax.swing.JFrame {
         comformPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         comformPasswordLabel.setText("Comform Password");
 
+<<<<<<< HEAD
         login.setText("Log In");
         login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginActionPerformed(evt);
+=======
+        Login.setText("Login");
+        Login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginActionPerformed(evt);
+>>>>>>> 1c7d94b618ca5879d4ae89f549a9b09eb5d71c1c
             }
         });
 
@@ -79,8 +94,13 @@ public class Register extends javax.swing.JFrame {
                         .addGap(136, 136, 136)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+<<<<<<< HEAD
                                 .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+=======
+                                .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+>>>>>>> 1c7d94b618ca5879d4ae89f549a9b09eb5d71c1c
                                 .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +146,11 @@ public class Register extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(register)
+<<<<<<< HEAD
                     .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+=======
+                    .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+>>>>>>> 1c7d94b618ca5879d4ae89f549a9b09eb5d71c1c
                 .addGap(101, 101, 101))
         );
 
@@ -144,8 +168,26 @@ public class Register extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean isValidEmail(String email) {
+    // Regular expression for basic email validation
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return email.matches(emailRegex);
+    }
+
+    private boolean isValidPassword(String password) {
+    // Regular expression for password validation (minimum 8 characters, at least one uppercase letter)
+        String passwordRegex = "^(?=.*[A-Z]).{8,}$";
+        return password.matches(passwordRegex);
+    }
+    
+    private boolean isValidPhone(String phone){
+    // Function for phone number validation ()
+        String phoneRegex = "^\\+?[0-9()-.\\s]{7,}$";
+        return phone.matches(phoneRegex);
+    }
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         
+<<<<<<< HEAD
         
     }//GEN-LAST:event_registerActionPerformed
 
@@ -155,6 +197,57 @@ public class Register extends javax.swing.JFrame {
         Login loginpage = new Login();
         loginpage.setVisible(true);
     }//GEN-LAST:event_loginActionPerformed
+=======
+        ConnectionToDB c = new ConnectionToDB();
+        try {
+            // Defining extracting text from user input
+            String nameText = name.getText().trim();
+            String emailText = email.getText().trim();
+            String phoneText = phone.getText().trim();
+            String passwordText = password.getText().trim();
+            String confirmPasswordText = comformPassword.getText().trim();
+
+            if (nameText.isEmpty() || emailText.isEmpty() || phoneText.isEmpty() || passwordText.isEmpty() || confirmPasswordText.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Fill the form first");
+            } else if (!passwordText.equals(confirmPasswordText)) {
+                JOptionPane.showMessageDialog(null, "Password doesnot match");
+            } else if (!isValidEmail(emailText)) {
+                JOptionPane.showMessageDialog(null, "Invalid Email");
+            } else if (!isValidPassword(passwordText)) {
+                JOptionPane.showMessageDialog(null, "Invalid Password: Password must be at least 8 characters long and contain at least one uppercase letter");
+            } else if (!isValidPhone(phoneText)){
+                JOptionPane.showMessageDialog(null, "Phone Should be 10 letter long number");
+            } else {
+                // Check if email already exists
+                PreparedStatement checkEmail = c.ps("SELECT * FROM appuser WHERE userEmail = ?");
+                checkEmail.setString(1, emailText);
+                ResultSet resultSet = checkEmail.executeQuery();
+
+                if (resultSet.next()) {
+                    JOptionPane.showMessageDialog(null, "Email already exists");
+                } else {
+                    // Insert new user
+                    PreparedStatement insertStatement = c.ps("INSERT INTO appuser(userName, userEmail, userPhone, passWord) VALUES (?, ?, ?, ?)");
+                    insertStatement.setString(1, nameText);
+                    insertStatement.setString(2, emailText);
+                    insertStatement.setString(3, phoneText);
+                    insertStatement.setString(4, passwordText);
+
+                    insertStatement.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Registered Successfully");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_registerActionPerformed
+
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
+        Login loginPage = new Login();
+        loginPage.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_LoginActionPerformed
+>>>>>>> 1c7d94b618ca5879d4ae89f549a9b09eb5d71c1c
 
     /**
      * @param args the command line arguments
@@ -192,6 +285,7 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Login;
     private javax.swing.JPasswordField comformPassword;
     private javax.swing.JLabel comformPasswordLabel;
     private javax.swing.JTextField email;
